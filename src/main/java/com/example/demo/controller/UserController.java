@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.repository.User;
+import com.example.demo.dto.UserRequestDTO;
+import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,11 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
+    public User create(@RequestBody UserRequestDTO userRequestDTO) {
+        User user = new User();
+        user.setName(userRequestDTO.name());
+        user.setEmail(userRequestDTO.email());
+        user.setBirth(userRequestDTO.birth());
         return userService.create(user);
     }
 
